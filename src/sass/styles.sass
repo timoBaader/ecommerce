@@ -1,0 +1,64 @@
+@mixin max-width-and-height
+    width: 100%
+    height: 100%
+
+
+    // Global styles
+body, html 
+    margin: 0
+    padding: 0
+
+.container 
+    width: 80em
+    margin: auto
+
+.margin-left
+    margin-left: 1em !important
+
+.margin-bottom
+    margin-bottom: 1em !important
+
+    // Navbar
+.navBar
+    background-color: #1976D2
+    height: 4em
+    display: flex
+    align-items: center
+    margin-bottom: 1em
+
+    // Products
+.allProducts-container
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+
+.allProducts-searchAndSortContainer
+    display: flex
+
+.productCard
+    margin-bottom: 1em
+
+.productCard-button
+    display: flex
+
+a 
+    text-decoration: none
+    font-family: 'Roboto', sans-serif
+    font-weight: 500
+    font-size: 1.5em
+    color: #FBF0EF
+
+.create-product-btn
+    height: 100%
+
+// Cart
+.cartItem
+    display: flex
+    height: 5em
+    width: 100%
+    justify-content: center
+    
+.cartItem-title
+    width: 15em
+
+.cartItem-price
+    width: 10em

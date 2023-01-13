@@ -86,9 +86,19 @@ const userSlice = createSlice({
     clearAlert: (state) => {
       state.error.message = "";
     },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.tokens.access_token = "";
+      state.tokens.refresh_token = "";
+      state.user.avatar = "";
+      state.user.email = "";
+      state.user.id = -1;
+      state.user.name = "";
+      state.user.password = "";
+      state.user.role = "";
+    },
   },
   extraReducers: (build) => {
-    // USER LOGIN (does not update userRole)
     build.addCase(userLogin.fulfilled, (state, action) => {
       if (action.payload) {
         console.log("User logged in");
@@ -120,7 +130,6 @@ const userSlice = createSlice({
       };
       return newState;
     });
-    // CHECK IF USER IS STILL LOGGED IN (does update userRole)
     build.addCase(isUserLoggedIn.fulfilled, (state, action) => {
       if (action.payload) {
         console.log("User is still logged in");
@@ -151,7 +160,6 @@ const userSlice = createSlice({
       };
       return newState;
     });
-    // CREATE USER
     build.addCase(createUser.fulfilled, (state, action) => {
       console.log("User created");
       if (action.payload) {
@@ -179,4 +187,5 @@ const userSlice = createSlice({
 });
 
 const userReducer = userSlice.reducer;
+export const { clearAlert, logout } = userSlice.actions;
 export default userReducer;

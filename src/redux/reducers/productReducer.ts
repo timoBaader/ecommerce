@@ -88,7 +88,6 @@ export const createProduct = createAsyncThunk(
 const productSlice = createSlice({
   name: "productSlice",
   initialState: initialState,
-  /* REGULAR REDUCERS ONLY CHANGE THE PRODUCT ARRAY, NOT THE SERVER THAT WE CALL VIA API */
   reducers: {
     sortByName: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
@@ -112,7 +111,6 @@ const productSlice = createSlice({
       }
     },
   },
-  /* EXTRA REDUCERS CALLS THE API AND MAKES CHANGES TO THE SERVER */
   extraReducers: (build) => {
     /* FETCH ALL PRODUCTS */
     build.addCase(fetchAllProducts.fulfilled, (state, action) => {

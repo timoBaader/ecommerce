@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-
+import "swiper/css/bundle";
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 

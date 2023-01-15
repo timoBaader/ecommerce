@@ -1,4 +1,12 @@
-import { Avatar, Button } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
@@ -18,11 +26,33 @@ const LoggedIn = () => {
 
   return (
     <div>
-      <Avatar alt="Profile image" src={userState.user.avatar} />
-      <p>{userState.user.name}</p>
-      <Button variant="contained" onClick={() => handleLogout()}>
-        Logout
-      </Button>
+      {userState.user && (
+        <div>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardMedia
+              sx={{ height: 140 }}
+              image={userState.user.avatar}
+              title="profile image"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {userState.user.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Role: {userState.user.role}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Email: {userState.user.email}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button variant="contained" onClick={() => handleLogout()}>
+                Logout
+              </Button>
+            </CardActions>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

@@ -10,14 +10,7 @@ const initialState: UserReducerStateProp = {
   tokens: { access_token: "", refresh_token: "" },
   isLoggedIn: false,
   // should be undefined initially
-  user: {
-    id: -1,
-    email: "",
-    password: "",
-    name: "",
-    role: "",
-    avatar: "",
-  },
+  user: undefined,
   error: { type: { severity: "error" }, message: "" },
 };
 
@@ -87,15 +80,8 @@ const userSlice = createSlice({
       state.error.message = "";
     },
     logout: (state) => {
-      state.isLoggedIn = false;
-      state.tokens.access_token = "";
-      state.tokens.refresh_token = "";
-      state.user.avatar = "";
-      state.user.email = "";
-      state.user.id = -1;
-      state.user.name = "";
-      state.user.password = "";
-      state.user.role = "";
+      state = initialState;
+      return state;
     },
   },
   extraReducers: (build) => {

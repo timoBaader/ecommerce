@@ -49,7 +49,7 @@ const HomePage = () => {
             <div className="productCard" key={product.id}>
               <ProductCard
                 product={product}
-                userRole={user.user.role}
+                userRole={user.user ? user.user.role : ""}
               ></ProductCard>
             </div>
           </SwiperSlide>

@@ -5,7 +5,7 @@ import { UserProp } from "./UserProp";
 export interface UserReducerStateProp {
   tokens: JwtTokenProp;
   isLoggedIn: boolean;
-  user: UserProp;
+  user: UserProp | undefined;
   error: {
     type: ErrorTypeProp;
     message: string;

@@ -23,7 +23,7 @@ import { CreateProductProp } from "../../../interfaces/CreateProductProp";
 import { ParamsProp } from "../../../interfaces/ParamsProp";
 import { ProductProp } from "../../../interfaces/ProductProp";
 import { UpdateProductProp } from "../../../interfaces/UpdateProductProp";
-import { addItem } from "../../../redux/reducers/CartReducer";
+import { addItem } from "../../../redux/reducers/cartReducer";
 import {
   deleteSingleProduct,
   fetchSingleProduct,
@@ -149,24 +149,26 @@ const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
               {product.price}€
             </Typography>
             <div>
-              {/* {user.user.role === "admin" && ( */}
-              <Button
-                variant="contained"
-                onClick={() => {
-                  dispatch(deleteSingleProduct(product.id));
-                  navigate(-1);
-                }}
-              >
-                Delete
-              </Button>
-              <Button
-                className="margin-left"
-                variant="contained"
-                onClick={handleOpen}
-              >
-                Edit
-              </Button>
-              {/* )} */}
+              {user.user && user.user.role === "admin" && (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    dispatch(deleteSingleProduct(product.id));
+                    navigate(-1);
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+              {user.user && user.user.role === "admin" && (
+                <Button
+                  className="margin-left"
+                  variant="contained"
+                  onClick={handleOpen}
+                >
+                  Edit
+                </Button>
+              )}
               <Button
                 className="margin-left"
                 variant="contained"

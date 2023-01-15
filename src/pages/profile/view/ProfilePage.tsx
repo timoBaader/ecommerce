@@ -9,7 +9,11 @@ import {
 import React, { useEffect, useState } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { createUser, userLogin } from "../../../redux/reducers/userReducer";
+import {
+  clearAlert,
+  createUser,
+  userLogin,
+} from "../../../redux/reducers/userReducer";
 
 import LoggedIn from "../components/LoggedIn";
 import { RootState } from "../../../redux/store";
@@ -64,7 +68,7 @@ const ProfilePage = () => {
 
   return (
     <div className="container">
-      {userState.isLoggedIn ? (
+      {userState.tokens.access_token ? (
         // I could display the cart here??
         <LoggedIn></LoggedIn>
       ) : (

@@ -18,10 +18,10 @@ const LoggedIn = () => {
     return state.userReducer;
   });
 
-  const dispatch = useAppDispatcher;
+  const dispatch = useAppDispatcher();
 
   const handleLogout = () => {
-    //dispatch(logout());
+    dispatch(logout());
   };
 
   return (

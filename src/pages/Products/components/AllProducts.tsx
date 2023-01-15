@@ -1,8 +1,8 @@
-import { Button, Input, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Button, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { Product } from "../../../interfaces/product";
+import { ProductProp } from "../../../interfaces/ProductProp";
 import {
   fetchAllProducts,
   sortByCategory,
@@ -10,14 +10,14 @@ import {
   sortByPrice,
 } from "../../../redux/reducers/productReducer";
 import { isUserLoggedIn } from "../../../redux/reducers/userReducer";
-import ActionAreaCard from "./ActionAreaCard";
 import CreateProduct from "./CreateProduct";
+import ProductCard from "./ProductCard";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
   const [sortToggle, setSortToggle] = useState<boolean>(false);
 
-  const products: Product[] = useAppSelector((state) => {
+  const products: ProductProp[] = useAppSelector((state) => {
     return state.productReducer.filter((item) => {
       return item.title.toLowerCase().indexOf(search.toLowerCase()) > -1;
     });
@@ -85,12 +85,12 @@ const AllProducts = () => {
         <CreateProduct></CreateProduct>
       </div>
       <div className="allProducts-container">
-        {products.map((product: Product) => (
+        {products.map((product: ProductProp) => (
           <div className="productCard" key={product.id}>
-            <ActionAreaCard
+            <ProductCard
               product={product}
               userRole={user.user.role}
-            ></ActionAreaCard>
+            ></ProductCard>
           </div>
         ))}
       </div>

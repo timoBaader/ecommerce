@@ -5,9 +5,9 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import { IActionAreaCard } from "../../../interfaces/IActionAreaCard";
+import { ProductCardProp } from "../../../interfaces/ProductCardProp";
 
-const ActionAreaCard = ({ product, userRole }: IActionAreaCard) => {
+const ProductCard = ({ product }: ProductCardProp) => {
   const navigate = useNavigate();
 
   const handleRedirect = (id: number) => {
@@ -42,4 +42,4 @@ const ActionAreaCard = ({ product, userRole }: IActionAreaCard) => {
   );
 };
 
-export default ActionAreaCard;
+export default ProductCard;

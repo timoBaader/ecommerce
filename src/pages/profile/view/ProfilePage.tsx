@@ -7,20 +7,22 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { NewUser } from "../../../interfaces/NewUser";
-import { login } from "../../../interfaces/login";
 import { createUser, userLogin } from "../../../redux/reducers/userReducer";
-import { CustomAlert } from "../../../hooks/CustomAlert";
+
 import LoggedIn from "../components/LoggedIn";
-import { persistor, RootState } from "../../../redux/store";
+import { RootState } from "../../../redux/store";
+import { CustomAlert } from "../../../hooks/CustomAlert";
+import { LoginProp } from "../../../interfaces/LoginProp";
+import { NewUserProp } from "../../../interfaces/NewUserProp";
 
 const ProfilePage = () => {
-  const [login, setLogin] = useState<login>({
+  const [login, setLogin] = useState<LoginProp>({
     email: "",
     password: "",
   });
-  const [newUserData, setNewUserData] = useState<NewUser>({
+  const [newUserData, setNewUserData] = useState<NewUserProp>({
     name: "",
     email: "",
     password: "",
@@ -119,7 +121,6 @@ const ProfilePage = () => {
           </Box>
         </div>
       )}
-      {hasAlert}
       {hasAlert && CustomAlert(userState.error.type, userState.error.message)}
     </div>
   );

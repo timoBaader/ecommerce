@@ -1,13 +1,13 @@
 import { Button, Typography } from "@mui/material";
-import React from "react";
+
 import { useAppDispatcher } from "../../../hooks/reduxHook";
-import { ICartItem } from "../../../interfaces/ICartItem";
+import { CartItemProp } from "../../../interfaces/CartItemProp";
 import {
   decrementQuantity,
   incrementQuantity,
 } from "../../../redux/reducers/CartReducer";
 
-const CartItem = (item: ICartItem) => {
+const CartItem = (item: CartItemProp) => {
   const dispatch = useAppDispatcher();
 
   return (

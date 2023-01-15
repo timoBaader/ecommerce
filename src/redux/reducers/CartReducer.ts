@@ -1,14 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICartItem } from "../../interfaces/ICartItem";
-import { Product } from "../../interfaces/product";
 
-const initialState: ICartItem[] = [];
+import { CartItemProp } from "../../interfaces/CartItemProp";
+import { ProductProp } from "../../interfaces/ProductProp";
+
+const initialState: CartItemProp[] = [];
 
 const cartSlice = createSlice({
   name: "cartSlice",
   initialState: initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<Product>) => {
+    addItem: (state, action: PayloadAction<ProductProp>) => {
       if (action.payload) {
         // check if item of that type is already in the cart
         const found = state.some(
@@ -38,7 +39,7 @@ const cartSlice = createSlice({
         console.log("Item not found");
       }
     },
-    incrementQuantity: (state, action: PayloadAction<Product>) => {
+    incrementQuantity: (state, action: PayloadAction<ProductProp>) => {
       const found = state.some((item) => item.product.id === action.payload.id);
       if (found) {
         const index = state.findIndex(
@@ -47,7 +48,7 @@ const cartSlice = createSlice({
         state[index] = { ...state[index], quantity: state[index].quantity + 1 };
       }
     },
-    decrementQuantity: (state, action: PayloadAction<Product>) => {
+    decrementQuantity: (state, action: PayloadAction<ProductProp>) => {
       const found = state.some((item) => item.product.id === action.payload.id);
       if (found) {
         const index = state.findIndex(

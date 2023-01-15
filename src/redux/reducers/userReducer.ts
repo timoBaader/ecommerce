@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 
-import { JwtToken } from "../../interfaces/jwtToken";
-import { login } from "../../interfaces/login";
-import { NewUser } from "../../interfaces/NewUser";
-import { UserReducerState } from "../../interfaces/UserReducerState";
+import { JwtTokenProp } from "../../interfaces/JwtTokenProp";
+import { LoginProp } from "../../interfaces/LoginProp";
+import { NewUserProp } from "../../interfaces/NewUserProp";
+import { UserReducerStateProp } from "../../interfaces/UserReducerStateProp";
 
-const initialState: UserReducerState = {
+const initialState: UserReducerStateProp = {
   tokens: { access_token: "", refresh_token: "" },
   isLoggedIn: false,
   // should be undefined initially
@@ -23,10 +23,10 @@ const initialState: UserReducerState = {
 
 export const userLogin = createAsyncThunk(
   "userLogin",
-  async (loginData: login) => {
+  async (loginData: LoginProp) => {
     console.log("object");
     try {
-      const response: AxiosResponse<JwtToken, any> = await axios.post(
+      const response: AxiosResponse<JwtTokenProp, any> = await axios.post(
         process.env.REACT_APP_URL + "auth/login",
         loginData
       );
@@ -60,7 +60,7 @@ export const isUserLoggedIn = createAsyncThunk(
 
 export const createUser = createAsyncThunk(
   "createUser",
-  async (newUserData: NewUser) => {
+  async (newUserData: NewUserProp) => {
     console.log(newUserData);
     try {
       const response = await axios.post(process.env.REACT_APP_URL + "users/", {
@@ -102,7 +102,7 @@ const userSlice = createSlice({
     build.addCase(userLogin.fulfilled, (state, action) => {
       if (action.payload) {
         console.log("User logged in");
-        const newState: UserReducerState = {
+        const newState: UserReducerStateProp = {
           ...state,
           tokens: action.payload,
           isLoggedIn: true,
@@ -115,7 +115,7 @@ const userSlice = createSlice({
     });
     build.addCase(userLogin.rejected, (state, action) => {
       console.log("Login failed");
-      const newState: UserReducerState = {
+      const newState: UserReducerStateProp = {
         ...state,
         isLoggedIn: false,
         tokens: { access_token: "", refresh_token: "" },
@@ -133,7 +133,7 @@ const userSlice = createSlice({
     build.addCase(isUserLoggedIn.fulfilled, (state, action) => {
       if (action.payload) {
         console.log("User is still logged in");
-        const newState: UserReducerState = {
+        const newState: UserReducerStateProp = {
           ...state,
           isLoggedIn: true,
           user: action.payload,
@@ -146,7 +146,7 @@ const userSlice = createSlice({
     });
     build.addCase(isUserLoggedIn.rejected, (state, action) => {
       console.log("User session has expired");
-      const newState: UserReducerState = {
+      const newState: UserReducerStateProp = {
         ...state,
         isLoggedIn: false,
         user: {

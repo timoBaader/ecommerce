@@ -72,6 +72,10 @@ a {
   width: 10em;
 }
 
+.cart-totalPrice {
+  text-align: end;
+}
+
 .swiper {
   width: 100%;
   height: 100%;

@@ -1,7 +1,8 @@
 import Alert from "@mui/material/Alert";
-import { ErrorType } from "../interfaces/ErrorType";
 
-export const CustomAlert = ({ severity }: ErrorType, message: string) => {
+import { ErrorTypeProp } from "../interfaces/ErrorTypeProp";
+
+export const CustomAlert = ({ severity }: ErrorTypeProp, message: string) => {
   return (
     <Alert variant="filled" severity={severity}>
       {message}

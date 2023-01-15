@@ -13,26 +13,26 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { style } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { Category } from "../../../interfaces/category";
-import { IUpdateProduct } from "../../../interfaces/IUpdateProduct";
-import { props } from "../../../interfaces/param";
-import { NewProduct, Product } from "../../../interfaces/product";
+import { CategoryProp } from "../../../interfaces/CategoryProp";
+import { CreateProductProp } from "../../../interfaces/CreateProductProp";
+import { ParamsProp } from "../../../interfaces/ParamsProp";
+import { ProductProp } from "../../../interfaces/ProductProp";
+import { UpdateProductProp } from "../../../interfaces/UpdateProductProp";
 import { addItem } from "../../../redux/reducers/CartReducer";
 import {
-  createProduct,
   deleteSingleProduct,
   fetchSingleProduct,
   updateProduct,
 } from "../../../redux/reducers/productReducer";
 import { isUserLoggedIn } from "../../../redux/reducers/userReducer";
 
-const SingleProduct: React.FC<props> = ({ id }) => {
-  const product: Product = useAppSelector((state) => {
+const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
+  const product: ProductProp = useAppSelector((state) => {
     return state.productReducer[0];
   });
 
@@ -41,8 +41,8 @@ const SingleProduct: React.FC<props> = ({ id }) => {
   });
 
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [updatedProduct, setUpdatedProduct] = useState<NewProduct>({
+  const [categories, setCategories] = useState<CategoryProp[]>([]);
+  const [updatedProduct, setUpdatedProduct] = useState<CreateProductProp>({
     title: product.title,
     description: product.description,
     price: product.price,
@@ -65,7 +65,7 @@ const SingleProduct: React.FC<props> = ({ id }) => {
   };
 
   const submitUpdatedProduct = () => {
-    let dataToUpdate: IUpdateProduct = {
+    let dataToUpdate: UpdateProductProp = {
       id: product.id,
     };
     // Checking which values exist and only adding those

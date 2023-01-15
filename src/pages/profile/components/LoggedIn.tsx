@@ -2,18 +2,18 @@ import { Avatar, Button } from "@mui/material";
 import React from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { UserReducerState } from "../../../interfaces/UserReducerState";
+import { UserReducerStateProp } from "../../../interfaces/UserReducerStateProp";
 import { logout } from "../../../redux/reducers/userReducer";
 
 const LoggedIn = () => {
-  const userState: UserReducerState = useAppSelector((state) => {
+  const userState: UserReducerStateProp = useAppSelector((state) => {
     return state.userReducer;
   });
 
   const dispatch = useAppDispatcher;
 
   const handleLogout = () => {
-    dispatch();
+    //dispatch(logout());
   };
 
   return (

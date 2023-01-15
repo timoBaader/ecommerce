@@ -1,13 +1,14 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
+
 import { useAppSelector } from "../../hooks/reduxHook";
-import { Product } from "../../interfaces/product";
-import ActionAreaCard from "../Products/components/ActionAreaCard";
 import { Typography } from "@mui/material";
+import ProductCard from "../Products/components/ProductCard";
+import { ProductProp } from "../../interfaces/ProductProp";
 
 const HomePage = () => {
-  const products: Product[] = useAppSelector((state) => {
+  const products: ProductProp[] = useAppSelector((state) => {
     return state.productReducer.slice(5, 10);
   });
   const user = useAppSelector((state) => {
@@ -43,13 +44,13 @@ const HomePage = () => {
         Check out people's favorite products!
       </Typography>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {products.map((product: Product) => (
+        {products.map((product: ProductProp) => (
           <SwiperSlide className="productSwiper">
             <div className="productCard" key={product.id}>
-              <ActionAreaCard
+              <ProductCard
                 product={product}
                 userRole={user.user.role}
-              ></ActionAreaCard>
+              ></ProductCard>
             </div>
           </SwiperSlide>
         ))}

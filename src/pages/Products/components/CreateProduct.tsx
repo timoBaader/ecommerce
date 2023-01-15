@@ -10,11 +10,12 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { NewProduct } from "../../../interfaces/product";
+
 import axios from "axios";
 import { useAppDispatcher } from "../../../hooks/reduxHook";
 import { createProduct } from "../../../redux/reducers/productReducer";
-import { Category } from "../../../interfaces/category";
+import { CategoryProp } from "../../../interfaces/CategoryProp";
+import { CreateProductProp } from "../../../interfaces/CreateProductProp";
 
 const style = {
   position: "absolute" as "absolute",
@@ -30,14 +31,14 @@ const style = {
 
 const CreateProduct = () => {
   const [open, setOpen] = useState(false);
-  const [product, setProduct] = useState<NewProduct>({
+  const [product, setProduct] = useState<CreateProductProp>({
     title: "",
     description: "",
     price: 0,
     categoryId: 1,
     images: [],
   });
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<CategoryProp[]>([]);
   const dispatch = useAppDispatcher();
 
   const fetchData = async () => {

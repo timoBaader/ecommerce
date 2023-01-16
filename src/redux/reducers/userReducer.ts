@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import { JwtTokenProp } from "../../interfaces/JwtTokenProp";
 import { LoginProp } from "../../interfaces/LoginProp";
 import { NewUserProp } from "../../interfaces/NewUserProp";
-import { UserReducerStateProp } from "../../interfaces/UserReducerStateProp";
+import { UserReducerProp } from "../../interfaces/UserReducerProp";
 
-const initialState: UserReducerStateProp = {
+const initialState: UserReducerProp = {
   tokens: { access_token: "", refresh_token: "" },
   isLoggedIn: false,
   user: undefined,
@@ -91,9 +91,8 @@ const userSlice = createSlice({
   extraReducers: (build) => {
     build.addCase(userLogin.fulfilled, (state, action) => {
       if (action.payload) {
-        const newState: UserReducerStateProp = {
+        const newState: UserReducerProp = {
           ...state,
-          alert: { type: "success", message: "Login successful" },
           tokens: action.payload,
           isLoggedIn: true,
         };
@@ -104,20 +103,19 @@ const userSlice = createSlice({
       return state;
     });
     build.addCase(userLogin.rejected, (state, action) => {
-      console.log("Login failed");
-      const newState: UserReducerStateProp = {
+      const newState: UserReducerProp = {
         ...state,
         isLoggedIn: false,
         alert: { type: "error", message: "Login failed" },
         tokens: { access_token: "", refresh_token: "" },
         user: undefined,
       };
+      toast.error("Login failed");
       return newState;
     });
     build.addCase(isUserLoggedIn.fulfilled, (state, action) => {
       if (action.payload) {
-        console.log("User is still logged in");
-        const newState: UserReducerStateProp = {
+        const newState: UserReducerProp = {
           ...state,
           isLoggedIn: true,
           user: action.payload,
@@ -129,10 +127,8 @@ const userSlice = createSlice({
       return state;
     });
     build.addCase(isUserLoggedIn.rejected, (state, action) => {
-      console.log("User session has expired");
-      const newState: UserReducerStateProp = {
+      const newState: UserReducerProp = {
         ...state,
-        alert: { type: "info", message: "Session expired" },
         isLoggedIn: false,
         user: undefined,
       };
@@ -142,10 +138,8 @@ const userSlice = createSlice({
       if (action.payload) {
         console.log(action.payload);
       }
-      return {
-        ...state,
-        alert: { type: "success", message: "User created successful" },
-      };
+      toast.success("User created successfully");
+      return state;
     });
     build.addCase(createUser.pending, (state, action) => {
       return state;
@@ -154,10 +148,8 @@ const userSlice = createSlice({
       if (action.payload) {
         console.log(action.payload);
       }
-      return {
-        ...state,
-        alert: { type: "error", message: "User creation failed" },
-      };
+      toast.error("Failed to create user");
+      return state;
     });
   },
 });

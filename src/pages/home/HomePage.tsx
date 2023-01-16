@@ -9,7 +9,7 @@ import { ProductProp } from "../../interfaces/ProductProp";
 
 const HomePage = () => {
   const products: ProductProp[] = useAppSelector((state) => {
-    return state.productReducer.slice(5, 10);
+    return state.productReducer.products.slice(5, 10);
   });
   const user = useAppSelector((state) => {
     return state.userReducer;

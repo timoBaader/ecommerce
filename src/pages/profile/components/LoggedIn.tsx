@@ -10,11 +10,11 @@ import {
 import React, { useEffect } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { UserReducerStateProp } from "../../../interfaces/UserReducerStateProp";
+import { UserReducerProp } from "../../../interfaces/UserReducerProp";
 import { isUserLoggedIn, logout } from "../../../redux/reducers/userReducer";
 
 const LoggedIn = () => {
-  const userState: UserReducerStateProp = useAppSelector((state) => {
+  const userState: UserReducerProp = useAppSelector((state) => {
     return state.userReducer;
   });
 

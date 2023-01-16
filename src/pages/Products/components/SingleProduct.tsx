@@ -16,6 +16,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
 import { CategoryProp } from "../../../interfaces/CategoryProp";
@@ -33,7 +34,7 @@ import { isUserLoggedIn } from "../../../redux/reducers/userReducer";
 
 const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
   const product: ProductProp = useAppSelector((state) => {
-    return state.productReducer[0];
+    return state.productReducer.products[0];
   });
 
   const user = useAppSelector((state) => {
@@ -83,7 +84,11 @@ const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
     });
     console.log(dataToUpdate);
     dispatch(updateProduct(dataToUpdate));
-    navigate("/products");
+    handleClose();
+    toast.success("Product updated successfully");
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
   };
 
   const fetchCategories = async () => {
@@ -154,7 +159,9 @@ const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
                   variant="contained"
                   onClick={() => {
                     dispatch(deleteSingleProduct(product.id));
-                    navigate(-1);
+                    setTimeout(() => {
+                      navigate("/products");
+                    }, 500);
                   }}
                 >
                   Delete
@@ -243,7 +250,7 @@ const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
               onChange={(e) => handleImage(e)}
             ></Input>
             <Button onClick={() => submitUpdatedProduct()}>
-              Create Product
+              Update Product
             </Button>
           </div>
         </Box>

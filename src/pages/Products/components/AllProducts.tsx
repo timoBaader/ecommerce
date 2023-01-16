@@ -18,7 +18,7 @@ const AllProducts = () => {
   const [sortToggle, setSortToggle] = useState<boolean>(false);
 
   const products: ProductProp[] = useAppSelector((state) => {
-    return state.productReducer.filter((item) => {
+    return state.productReducer.products.filter((item) => {
       return item.title.toLowerCase().indexOf(search.toLowerCase()) > -1;
     });
   });

@@ -74,6 +74,7 @@ const CreateProduct = () => {
   const submitProduct = () => {
     console.log("HERE");
     dispatch(createProduct(product));
+    handleClose();
   };
 
   return (

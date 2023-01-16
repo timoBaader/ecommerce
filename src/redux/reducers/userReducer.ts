@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 
 import { JwtTokenProp } from "../../interfaces/JwtTokenProp";
 import { LoginProp } from "../../interfaces/LoginProp";
@@ -9,9 +10,8 @@ import { UserReducerStateProp } from "../../interfaces/UserReducerStateProp";
 const initialState: UserReducerStateProp = {
   tokens: { access_token: "", refresh_token: "" },
   isLoggedIn: false,
-  // should be undefined initially
   user: undefined,
-  error: { type: { severity: "error" }, message: "" },
+  alert: { type: "info", message: "" },
 };
 
 export const userLogin = createAsyncThunk(
@@ -54,7 +54,6 @@ export const isUserLoggedIn = createAsyncThunk(
 export const createUser = createAsyncThunk(
   "createUser",
   async (newUserData: NewUserProp) => {
-    console.log(newUserData);
     try {
       const response = await axios.post(process.env.REACT_APP_URL + "users/", {
         email: newUserData.email,
@@ -66,7 +65,6 @@ export const createUser = createAsyncThunk(
       return response.data;
     } catch (err: any) {
       console.log(err.message);
-      console.log(err);
       throw err;
     }
   }
@@ -76,20 +74,26 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState: initialState,
   reducers: {
-    clearAlert: (state) => {
-      state.error.message = "";
-    },
     logout: (state) => {
       state = initialState;
       return state;
+    },
+    displayAlert: (state) => {
+      if (state.alert.type === "success") {
+        toast.success(state.alert.message);
+      } else if (state.alert.type === "error") {
+        toast.error(state.alert.message);
+      } else {
+        toast.info(state.alert.message);
+      }
     },
   },
   extraReducers: (build) => {
     build.addCase(userLogin.fulfilled, (state, action) => {
       if (action.payload) {
-        console.log("User logged in");
         const newState: UserReducerStateProp = {
           ...state,
+          alert: { type: "success", message: "Login successful" },
           tokens: action.payload,
           isLoggedIn: true,
         };
@@ -104,6 +108,7 @@ const userSlice = createSlice({
       const newState: UserReducerStateProp = {
         ...state,
         isLoggedIn: false,
+        alert: { type: "error", message: "Login failed" },
         tokens: { access_token: "", refresh_token: "" },
         user: undefined,
       };
@@ -127,37 +132,36 @@ const userSlice = createSlice({
       console.log("User session has expired");
       const newState: UserReducerStateProp = {
         ...state,
+        alert: { type: "info", message: "Session expired" },
         isLoggedIn: false,
         user: undefined,
       };
       return newState;
     });
     build.addCase(createUser.fulfilled, (state, action) => {
-      console.log("User created");
       if (action.payload) {
         console.log(action.payload);
       }
       return {
         ...state,
-        error: {
-          type: { severity: "success" },
-          message: "",
-        },
+        alert: { type: "success", message: "User created successful" },
       };
     });
     build.addCase(createUser.pending, (state, action) => {
       return state;
     });
     build.addCase(createUser.rejected, (state, action) => {
-      console.log("User creation failed");
       if (action.payload) {
         console.log(action.payload);
       }
-      return state;
+      return {
+        ...state,
+        alert: { type: "error", message: "User creation failed" },
+      };
     });
   },
 });
 
 const userReducer = userSlice.reducer;
-export const { clearAlert, logout } = userSlice.actions;
+export const { logout, displayAlert } = userSlice.actions;
 export default userReducer;

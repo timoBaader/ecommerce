@@ -7,13 +7,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
 import { createUser, userLogin } from "../../../redux/reducers/userReducer";
 import LoggedIn from "../components/LoggedIn";
 import { RootState } from "../../../redux/store";
-import { CustomAlert } from "../../../hooks/CustomAlert";
 import { LoginProp } from "../../../interfaces/LoginProp";
 import { NewUserProp } from "../../../interfaces/NewUserProp";
 
@@ -27,19 +25,12 @@ const ProfilePage = () => {
     email: "",
     password: "",
   });
-  const [hasAlert, setHasAlert] = useState<boolean>(false);
 
   const userState = useAppSelector((state: RootState) => {
     return state.userReducer;
   });
 
   const dispatch = useAppDispatcher();
-
-  useEffect(() => {
-    console.log(userState.error.message);
-    if (userState.error.message) setHasAlert(true);
-    //setTimeout(dispatch(clearAlert), 5000);
-  }, [userState.error.message]);
 
   const submitLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,10 +51,6 @@ const ProfilePage = () => {
       setLogin({ ...login, [e.target.name]: e.target.value });
     if (type === "create")
       setNewUserData({ ...newUserData, [e.target.name]: e.target.value });
-  };
-
-  const notify = () => {
-    toast("Hello there");
   };
 
   return (
@@ -124,9 +111,6 @@ const ProfilePage = () => {
           </Box>
         </div>
       )}
-      {hasAlert && CustomAlert(userState.error.type, userState.error.message)}
-      <button onClick={notify}>Notify</button>
-      <ToastContainer />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { useAppSelector } from "./hooks/reduxHook";
+import { useAppDispatcher, useAppSelector } from "./hooks/reduxHook";
 import "react-toastify/dist/ReactToastify.css";
 
 import CartPage from "./pages/cart/CartPage";
@@ -8,15 +8,23 @@ import NotFoundPage from "./pages/notFound/NotFoundPage";
 import ProductPage from "./pages/Products/view/ProductPage";
 import ProfilePage from "./pages/profile/view/ProfilePage";
 import "../src/css/styles.css";
+import { ToastContainer } from "react-toastify";
+import userReducer, { displayAlert } from "./redux/reducers/userReducer";
+import { useEffect } from "react";
 
 function App() {
   const userState = useAppSelector((state) => {
     return state.userReducer;
   });
 
+  const dispatch = useAppDispatcher();
+
+  useEffect(() => {
+    if (userState.alert.message) dispatch(displayAlert());
+  }, [dispatch, userState.alert]);
+
   return (
     <BrowserRouter>
-      {/* make a component */}
       <div className="navBar">
         <Link className="margin-left" to="/">
           Home
@@ -47,6 +55,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer position="bottom-left" />
     </BrowserRouter>
   );
 }

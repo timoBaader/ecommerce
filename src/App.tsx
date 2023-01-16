@@ -1,5 +1,6 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { useAppSelector } from "./hooks/reduxHook";
+import "react-toastify/dist/ReactToastify.css";
 
 import CartPage from "./pages/cart/CartPage";
 import HomePage from "./pages/home/HomePage";
@@ -26,7 +27,7 @@ function App() {
         <Link className="margin-left" to="/cart">
           Cart
         </Link>
-        {userState.isLoggedIn ? (
+        {userState.tokens.access_token ? (
           <Link className="margin-left" to="/profile">
             Profile
           </Link>

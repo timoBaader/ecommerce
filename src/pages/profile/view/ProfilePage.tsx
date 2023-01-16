@@ -7,14 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import {
-  clearAlert,
-  createUser,
-  userLogin,
-} from "../../../redux/reducers/userReducer";
-
+import { createUser, userLogin } from "../../../redux/reducers/userReducer";
 import LoggedIn from "../components/LoggedIn";
 import { RootState } from "../../../redux/store";
 import { CustomAlert } from "../../../hooks/CustomAlert";
@@ -66,10 +62,13 @@ const ProfilePage = () => {
       setNewUserData({ ...newUserData, [e.target.name]: e.target.value });
   };
 
+  const notify = () => {
+    toast("Hello there");
+  };
+
   return (
     <div className="container">
       {userState.tokens.access_token ? (
-        // I could display the cart here??
         <LoggedIn></LoggedIn>
       ) : (
         <div>
@@ -126,6 +125,8 @@ const ProfilePage = () => {
         </div>
       )}
       {hasAlert && CustomAlert(userState.error.type, userState.error.message)}
+      <button onClick={notify}>Notify</button>
+      <ToastContainer />
     </div>
   );
 };

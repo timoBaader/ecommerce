@@ -105,14 +105,7 @@ const userSlice = createSlice({
         ...state,
         isLoggedIn: false,
         tokens: { access_token: "", refresh_token: "" },
-        user: {
-          id: -1,
-          name: "",
-          email: "",
-          password: "",
-          avatar: "",
-          role: "",
-        },
+        user: undefined,
       };
       return newState;
     });
@@ -135,14 +128,7 @@ const userSlice = createSlice({
       const newState: UserReducerStateProp = {
         ...state,
         isLoggedIn: false,
-        user: {
-          id: -1,
-          email: "",
-          password: "",
-          name: "",
-          role: "",
-          avatar: "",
-        },
+        user: undefined,
       };
       return newState;
     });
@@ -155,7 +141,7 @@ const userSlice = createSlice({
         ...state,
         error: {
           type: { severity: "success" },
-          message: "User created successfully",
+          message: "",
         },
       };
     });

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
-import { CreateProductProp } from "../../interfaces/CreateProductProp";
 
+import { CreateProductProp } from "../../interfaces/CreateProductProp";
 import { ProductProp } from "../../interfaces/ProductProp";
 import { UpdateProductProp } from "../../interfaces/UpdateProductProp";
 

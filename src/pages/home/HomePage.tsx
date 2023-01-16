@@ -44,8 +44,8 @@ const HomePage = () => {
         Check out people's favorite products!
       </Typography>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-        {products.map((product: ProductProp) => (
-          <SwiperSlide className="productSwiper">
+        {products.map((product: ProductProp, index) => (
+          <SwiperSlide key={index} className="productSwiper">
             <div className="productCard" key={product.id}>
               <ProductCard
                 product={product}

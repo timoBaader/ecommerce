@@ -7,11 +7,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
 import { UserReducerStateProp } from "../../../interfaces/UserReducerStateProp";
-import { logout } from "../../../redux/reducers/userReducer";
+import { isUserLoggedIn, logout } from "../../../redux/reducers/userReducer";
 
 const LoggedIn = () => {
   const userState: UserReducerStateProp = useAppSelector((state) => {
@@ -20,13 +20,17 @@ const LoggedIn = () => {
 
   const dispatch = useAppDispatcher();
 
+  useEffect(() => {
+    dispatch(isUserLoggedIn(userState.tokens.access_token));
+  }, [dispatch, userState.tokens.access_token]);
+
   const handleLogout = () => {
     dispatch(logout());
   };
 
   return (
     <div>
-      {userState.user && (
+      {userState.user ? (
         <div>
           <Card sx={{ maxWidth: 345 }}>
             <CardMedia
@@ -52,6 +56,8 @@ const LoggedIn = () => {
             </CardActions>
           </Card>
         </div>
+      ) : (
+        <Typography>Loading...</Typography>
       )}
     </div>
   );

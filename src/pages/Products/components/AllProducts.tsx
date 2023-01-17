@@ -2,7 +2,7 @@ import { Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { ProductProp } from "../../../interfaces/ProductProp";
+import { ProductProp } from "../../../interfaces/product/ProductProp";
 import {
   fetchAllProducts,
   sortByCategory,

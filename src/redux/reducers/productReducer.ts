@@ -2,14 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
-import { CreateProductProp } from "../../interfaces/CreateProductProp";
-import { ProductProp } from "../../interfaces/ProductProp";
-import { ProductReducerProp } from "../../interfaces/ProductReducerProp";
-import { UpdateProductProp } from "../../interfaces/UpdateProductProp";
+import { CreateProductProp } from "../../interfaces/product/CreateProductProp";
+import { ProductProp } from "../../interfaces/product/ProductProp";
+import { ProductReducerProp } from "../../interfaces/product/ProductReducerProp";
+import { UpdateProductProp } from "../../interfaces/product/UpdateProductProp";
 
 const initialState: ProductReducerProp = {
   products: [],
-  alert: { type: "success", message: "" },
 };
 
 export const fetchAllProducts = createAsyncThunk(

@@ -14,8 +14,8 @@ import {
 import axios from "axios";
 import { useAppDispatcher } from "../../../hooks/reduxHook";
 import { createProduct } from "../../../redux/reducers/productReducer";
-import { CategoryProp } from "../../../interfaces/CategoryProp";
-import { CreateProductProp } from "../../../interfaces/CreateProductProp";
+import { CategoryProp } from "../../../interfaces/product/CategoryProp";
+import { CreateProductProp } from "../../../interfaces/product/CreateProductProp";
 
 const style = {
   position: "absolute" as "absolute",

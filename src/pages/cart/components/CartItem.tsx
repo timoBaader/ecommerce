@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 
 import { useAppDispatcher } from "../../../hooks/reduxHook";
-import { CartItemProp } from "../../../interfaces/CartItemProp";
+import { CartItemProp } from "../../../interfaces/cart/CartItemProp";
 import {
   decrementQuantity,
   incrementQuantity,

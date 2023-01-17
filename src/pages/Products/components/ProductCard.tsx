@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import { ProductCardProp } from "../../../interfaces/ProductCardProp";
+import { ProductCardProp } from "../../../interfaces/product/ProductCardProp";
 
 const ProductCard = ({ product }: ProductCardProp) => {
   const navigate = useNavigate();

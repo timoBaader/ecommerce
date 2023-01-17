@@ -19,11 +19,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { CategoryProp } from "../../../interfaces/CategoryProp";
-import { CreateProductProp } from "../../../interfaces/CreateProductProp";
-import { ParamsProp } from "../../../interfaces/ParamsProp";
-import { ProductProp } from "../../../interfaces/ProductProp";
-import { UpdateProductProp } from "../../../interfaces/UpdateProductProp";
+import { CategoryProp } from "../../../interfaces/product/CategoryProp";
+import { CreateProductProp } from "../../../interfaces/product/CreateProductProp";
+import { ParamsProp } from "../../../interfaces/product/ParamsProp";
+import { ProductProp } from "../../../interfaces/product/ProductProp";
+import { UpdateProductProp } from "../../../interfaces/product/UpdateProductProp";
 import { addItem } from "../../../redux/reducers/cartReducer";
 import {
   deleteSingleProduct,

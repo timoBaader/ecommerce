@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
-import { CartItemProp } from "../../interfaces/CartItemProp";
-import { ProductProp } from "../../interfaces/ProductProp";
+import { CartItemProp } from "../../interfaces/cart/CartItemProp";
+import { ProductProp } from "../../interfaces/product/ProductProp";
 
 const initialState: CartItemProp[] = [];
 
@@ -20,8 +21,10 @@ const cartSlice = createSlice({
             (item) => item.product.id === action.payload.id
           );
           state[index].quantity += 1;
+          toast.success("Item added to cart");
         } else {
           state.push({ product: action.payload, quantity: 1 });
+          toast.success("Item added to cart");
         }
       }
     },

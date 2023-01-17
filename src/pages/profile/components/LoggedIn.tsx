@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Card,
   CardActions,
@@ -10,7 +9,7 @@ import {
 import React, { useEffect } from "react";
 
 import { useAppDispatcher, useAppSelector } from "../../../hooks/reduxHook";
-import { UserReducerProp } from "../../../interfaces/UserReducerProp";
+import { UserReducerProp } from "../../../interfaces/user/UserReducerProp";
 import { isUserLoggedIn, logout } from "../../../redux/reducers/userReducer";
 
 const LoggedIn = () => {

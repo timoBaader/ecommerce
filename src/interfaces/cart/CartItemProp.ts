@@ -1,4 +1,4 @@
-import { ProductProp } from "./ProductProp";
+import { ProductProp } from "../product/ProductProp";
 
 export interface CartItemProp {
   product: ProductProp;

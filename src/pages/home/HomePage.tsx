@@ -5,7 +5,7 @@ import { Navigation } from "swiper";
 import { useAppSelector } from "../../hooks/reduxHook";
 import { Typography } from "@mui/material";
 import ProductCard from "../Products/components/ProductCard";
-import { ProductProp } from "../../interfaces/ProductProp";
+import { ProductProp } from "../../interfaces/product/ProductProp";
 
 const HomePage = () => {
   const products: ProductProp[] = useAppSelector((state) => {

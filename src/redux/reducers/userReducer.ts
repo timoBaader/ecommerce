@@ -2,16 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 
-import { JwtTokenProp } from "../../interfaces/JwtTokenProp";
-import { LoginProp } from "../../interfaces/LoginProp";
-import { NewUserProp } from "../../interfaces/NewUserProp";
-import { UserReducerProp } from "../../interfaces/UserReducerProp";
+import { JwtTokenProp } from "../../interfaces/user/JwtTokenProp";
+import { LoginProp } from "../../interfaces/user/LoginProp";
+import { NewUserProp } from "../../interfaces/user/NewUserProp";
+import { UserReducerProp } from "../../interfaces/user/UserReducerProp";
 
 const initialState: UserReducerProp = {
   tokens: { access_token: "", refresh_token: "" },
-  isLoggedIn: false,
   user: undefined,
-  alert: { type: "info", message: "" },
 };
 
 export const userLogin = createAsyncThunk(
@@ -78,15 +76,6 @@ const userSlice = createSlice({
       state = initialState;
       return state;
     },
-    displayAlert: (state) => {
-      if (state.alert.type === "success") {
-        toast.success(state.alert.message);
-      } else if (state.alert.type === "error") {
-        toast.error(state.alert.message);
-      } else {
-        toast.info(state.alert.message);
-      }
-    },
   },
   extraReducers: (build) => {
     build.addCase(userLogin.fulfilled, (state, action) => {
@@ -94,7 +83,6 @@ const userSlice = createSlice({
         const newState: UserReducerProp = {
           ...state,
           tokens: action.payload,
-          isLoggedIn: true,
         };
         return newState;
       }
@@ -105,8 +93,6 @@ const userSlice = createSlice({
     build.addCase(userLogin.rejected, (state, action) => {
       const newState: UserReducerProp = {
         ...state,
-        isLoggedIn: false,
-        alert: { type: "error", message: "Login failed" },
         tokens: { access_token: "", refresh_token: "" },
         user: undefined,
       };
@@ -117,7 +103,6 @@ const userSlice = createSlice({
       if (action.payload) {
         const newState: UserReducerProp = {
           ...state,
-          isLoggedIn: true,
           user: action.payload,
         };
         return newState;
@@ -129,7 +114,6 @@ const userSlice = createSlice({
     build.addCase(isUserLoggedIn.rejected, (state, action) => {
       const newState: UserReducerProp = {
         ...state,
-        isLoggedIn: false,
         user: undefined,
       };
       return newState;
@@ -155,5 +139,5 @@ const userSlice = createSlice({
 });
 
 const userReducer = userSlice.reducer;
-export const { logout, displayAlert } = userSlice.actions;
+export const { logout } = userSlice.actions;
 export default userReducer;

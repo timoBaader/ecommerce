@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 
-import { useAppSelector } from "../../hooks/reduxHook";
+import { useAppDispatcher, useAppSelector } from "../../hooks/reduxHook";
 import { Typography } from "@mui/material";
 import ProductCard from "../Products/components/ProductCard";
 import { ProductProp } from "../../interfaces/product/ProductProp";
+import { fetchAllProducts } from "../../redux/reducers/productReducer";
 
 const HomePage = () => {
+  const dispatch = useAppDispatcher();
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
   const products: ProductProp[] = useAppSelector((state) => {
     return state.productReducer.products.slice(5, 10);
   });

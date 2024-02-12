@@ -12,7 +12,7 @@ const CartItem = (item: CartItemProp) => {
 
   return (
     <div className="cartItem margin-bottom">
-      <img src={item.product.images[0]} alt="product"></img>
+      <img src={item.product.category.image} alt="product"></img>
       <Typography className="margin-left cartItem-title">
         {item.product.title}
       </Typography>

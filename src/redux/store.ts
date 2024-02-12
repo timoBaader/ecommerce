@@ -16,7 +16,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
-import cartReducer from "./reducers/cartReducer";
+import cartReducer from "./reducers/CartReducer";
 import productReducer from "./reducers/productReducer";
 import userReducer from "./reducers/userReducer";
 

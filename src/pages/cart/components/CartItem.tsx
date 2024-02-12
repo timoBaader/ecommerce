@@ -5,7 +5,7 @@ import { CartItemProp } from "../../../interfaces/cart/CartItemProp";
 import {
   decrementQuantity,
   incrementQuantity,
-} from "../../../redux/reducers/cartReducer";
+} from "../../../redux/reducers/CartReducer";
 
 const CartItem = (item: CartItemProp) => {
   const dispatch = useAppDispatcher();

@@ -24,7 +24,7 @@ import { CreateProductProp } from "../../../interfaces/product/CreateProductProp
 import { ParamsProp } from "../../../interfaces/product/ParamsProp";
 import { ProductProp } from "../../../interfaces/product/ProductProp";
 import { UpdateProductProp } from "../../../interfaces/product/UpdateProductProp";
-import { addItem } from "../../../redux/reducers/cartReducer";
+import { addItem } from "../../../redux/reducers/CartReducer";
 import {
   deleteSingleProduct,
   fetchSingleProduct,

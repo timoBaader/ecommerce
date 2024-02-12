@@ -189,7 +189,7 @@ const SingleProduct: React.FC<ParamsProp> = ({ id }) => {
         <CardMedia
           component="img"
           sx={{ width: 500 }}
-          image={product.images[0]}
+          image={product.category.image}
           alt="Image of the product"
         />
       </Card>

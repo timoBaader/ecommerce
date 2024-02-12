@@ -17,7 +17,7 @@ const ProductCard = ({ product }: ProductCardProp) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
-        <CardMedia component="img" height="140" image={product.images[0]} />
+        <CardMedia component="img" height="140" image={product.category.image} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {product.title}
@@ -28,6 +28,13 @@ const ProductCard = ({ product }: ProductCardProp) => {
             color="text.secondary"
           >
             {product.description}
+          </Typography>
+          <Typography
+            sx={{ height: 10 }}
+            variant="body2"
+            color="text.secondary"
+          >
+            {product.price}€
           </Typography>
         </CardContent>
         <Button

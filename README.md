@@ -9,3 +9,6 @@ https://timoecommerce.vercel.app/
 # To test admin functionality (update, delete) use these credentials 
 admin@mail.com
 admin123
+
+Do keep in mind that this API is not specific to my app, anyone can modify the 
+products on the page

@@ -27,7 +27,10 @@ const ProductCard = ({ product }: ProductCardProp) => {
             variant="body2"
             color="text.secondary"
           >
-            {product.description}
+            {(product.description.length > 100) ? 
+              `${product.description.substring(0, 100)}...` : 
+              product.description
+            }
           </Typography>
           <Typography
             sx={{ height: 10 }}
